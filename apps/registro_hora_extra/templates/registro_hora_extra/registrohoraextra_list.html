@@ -8,8 +8,15 @@
 
 
     {% for registro_hora_extra in object_list %}
-        {{ registro_hora_extra }}
+        <p>
+            <a href="{% url 'edit_hora_extra' registro_hora_extra.id %}"> {{ registro_hora_extra }} </a>
+            <a class="btn btn-danger" href="{% url 'delete_hora_extra' registro_hora_extra.id %}"> Deletar </a>
+        </p>
+
     {% endfor %}
 
 
+    <p>
+        <a class="btn btn-info" href="{% url 'create_hora_extra' %}"> Criar </a>
+    </p>
 {% endblock %}
