@@ -1,0 +1,15 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+    Lista de Hora Extra
+{% endblock %}
+
+{% block main %}
+
+
+    {% for registro_hora_extra in object_list %}
+        {{ registro_hora_extra }}
+    {% endfor %}
+
+
+{% endblock %}
