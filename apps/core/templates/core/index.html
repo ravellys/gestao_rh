@@ -5,9 +5,19 @@
 {% endblock %}
 
 {% block main %}
-    <div class="col-sm">
+    <div class="col-lg">
         <h1> Bem vindo </h1>
     </div>
+    <div class="col-lg">
+        <a href="{% url 'list_funcionarios' %}"> Gerenciar funcionarios </a>
+    </div>
+    <div class="col-lg">
+        <a href="{% url 'list_departamentos' %}"> Gerenciar Departamentos </a>
+    </div>
+    <div class="col-lg">
+        <a href="{% url 'list_hora_extra' %}"> Gerenciar Hora Extra </a>
+    </div>
+
     <div class="col-sm">
         <h1> {{ usuario.funcionario.nome }} </h1>
         {% if usuario.funcionario.empresa %}
