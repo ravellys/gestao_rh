@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from django.db import models
 
 # Create your models here.
+from django.db.models import Sum
 from django.urls import reverse
 
 from apps.departamentos.models import Departamento
@@ -16,6 +17,10 @@ class Funcionario(models.Model):
 
     def __str__(self):
         return self.nome
+
+    @property
+    def total_hora_extra(self):
+         return self.registrohoraextra_set.aggregate(soma_horaextra=Sum('horaextra'))['soma_horaextra']
 
     def get_absolute_url(self):
         return reverse('list_funcionarios')

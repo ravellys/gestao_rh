@@ -15,4 +15,4 @@ class RegistroHoraExtra(models.Model):
         return self.motivo
 
     def get_absolute_url(self):
-        return reverse('edit_hora_extra', args=(self.id, ))
+        return reverse('edit_funcionarios', args=(self.funcionario.id, ))

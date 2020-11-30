@@ -11,15 +11,41 @@
     <form method="post">
         {% csrf_token %}
         {{ form|bootstrap }}
-        <button type="submit"> Editar </button>
+        <button type="submit"> Submit </button>
     </form>
 
-
+{% if object %}
     <div class="container mt-4">
+
+        <h3> Documentos </h3>
+        <ul class="list-group">
+            {% for documento in object.documento_set.all %}
+                <li class="list-group-item">
+                    <a href="{% url 'edit_documento' documento.id %}">{{ documento.descricao }}</a>
+                </li>
+            {% endfor %}
+        </ul>
         <a class="btn btn-info" href="{% url 'create_documento' object.id %}"> Add Documento</a>
 
-        {% for documento in object.documento_set.all %}
-            <p>{{ documento.descricao }}</p>
-        {% endfor %}
     </div>
+
+    <div class="container mt-4">
+
+        <h3> Hora Extra </h3>
+        <ul class="list-group">
+            {% for rhe in object.registrohoraextra_set.all %}
+                <li class="list-group-item">
+
+                <a href="{% url 'edit_hora_extra' rhe.id %}">{{ rhe.motivo }}</a>
+                    <p>{{ rhe.horaextra }}   </p>
+                </li>
+            {% endfor %}
+        </ul>
+        <a class="btn btn-info" href="{% url 'create_hora_extra' %}"> Add Hora Extra</a>
+        <h3>Total de horas extra: {{ object.total_hora_extra }}</h3>
+
+    </div>
+{% endif %}
+
+
 {% endblock %}

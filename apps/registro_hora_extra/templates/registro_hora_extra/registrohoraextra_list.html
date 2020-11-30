@@ -9,7 +9,7 @@
 
     {% for registro_hora_extra in object_list %}
         <p>
-            <a href="{% url 'edit_hora_extra' registro_hora_extra.id %}"> {{ registro_hora_extra }} </a>
+            <a href="{% url 'edit_hora_extra_base' registro_hora_extra.id %}"> {{ registro_hora_extra }} </a>
             <a class="btn btn-danger" href="{% url 'delete_hora_extra' registro_hora_extra.id %}"> Deletar </a>
         </p>
 
