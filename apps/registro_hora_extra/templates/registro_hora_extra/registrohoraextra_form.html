@@ -1,4 +1,5 @@
 {% extends 'base/base.html' %}
+{% load static %}
 
 {% load bootstrap %}
 
@@ -15,6 +16,17 @@
         {% if object %}
             <a class="btn btn-danger" href="{% url 'delete_hora_extra' object.id %}"> Deletar </a>
         {% endif %}
+
+    <p id="#mensage"></p>
     </form>
+
+    <button class="btn btn-dark" onclick="utilizouHoraExtra({{ object.id }})"> Hora Extra Utilizada </button>
+
+{% endblock %}
+
+{% block static %}
+
+    <script src="{% static 'bootstrap/js/jquery-3.5.1.min.js' %}"></script>
+    <script src="{% static 'bootstrap/js/funcoes-ajax.js' %}"></script>
 
 {% endblock %}

@@ -1,7 +1,11 @@
+import json
+
+from django.http import HttpResponse
 from django.shortcuts import render
 
 # Create your views here.
 from django.urls import reverse_lazy, reverse
+from django.views import View
 from django.views.generic import ListView, UpdateView, DeleteView, CreateView
 
 from apps.registro_hora_extra.forms import RegistroHoraExtraForm
@@ -15,6 +19,7 @@ class RegistroHoraExtraListView(ListView):
         empresa_logada = self.request.user.funcionario.empresa
         return RegistroHoraExtra.objects.filter(funcionario__empresa=empresa_logada)
 
+
 class RegistroHoraExtraUpdateView(UpdateView):
     model = RegistroHoraExtra
     form_class = RegistroHoraExtraForm
@@ -23,6 +28,7 @@ class RegistroHoraExtraUpdateView(UpdateView):
         kwargs = super(RegistroHoraExtraUpdateView, self).get_form_kwargs()
         kwargs.update({'user': self.request.user})
         return kwargs
+
 
 class RegistroHoraExtraBaseUpdateView(UpdateView):
     model = RegistroHoraExtra
@@ -37,9 +43,11 @@ class RegistroHoraExtraBaseUpdateView(UpdateView):
         kwargs.update({'user': self.request.user})
         return kwargs
 
+
 class RegistroHoraExtraDeleteView(DeleteView):
     model = RegistroHoraExtra
     success_url = reverse_lazy('list_hora_extra')
+
 
 class RegistroHoraExtraCreateView(CreateView):
     model = RegistroHoraExtra
@@ -49,3 +57,11 @@ class RegistroHoraExtraCreateView(CreateView):
         kwargs = super(RegistroHoraExtraCreateView, self).get_form_kwargs()
         kwargs.update({'user': self.request.user})
         return kwargs
+
+
+class UtilizouHoraExtraView(View):
+    def post(self, *args, **kwargs):
+        response = json.dumps({
+            "mensagem": "Requisição Executada"
+        })
+        return HttpResponse(response, content_type='application/json')
