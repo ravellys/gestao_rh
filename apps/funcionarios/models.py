@@ -20,7 +20,8 @@ class Funcionario(models.Model):
 
     @property
     def total_hora_extra(self):
-         return self.registrohoraextra_set.aggregate(soma_horaextra=Sum('horaextra'))['soma_horaextra']
+        total = self.registrohoraextra_set.filter(utilizada=False).aggregate(soma_horaextra=Sum('horaextra'))['soma_horaextra']
+        return total or 0
 
     def get_absolute_url(self):
         return reverse('list_funcionarios')
