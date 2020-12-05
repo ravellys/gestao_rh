@@ -1,3 +1,4 @@
+import csv
 import json
 
 from django.http import HttpResponse
@@ -11,6 +12,7 @@ from django.views.generic import ListView, UpdateView, DeleteView, CreateView
 from apps.registro_hora_extra.forms import RegistroHoraExtraForm
 from apps.registro_hora_extra.models import RegistroHoraExtra
 
+import pandas as pd
 
 class RegistroHoraExtraListView(ListView):
     model = RegistroHoraExtra
@@ -89,3 +91,33 @@ class NaoUtilizouHoraExtraView(View):
              'horas': float(horas)}
         )
         return HttpResponse(response, content_type='application/json')
+
+
+class ExportarCsvView(View):
+    def get(self, request):
+        # Create the HttpResponse object with the appropriate CSV header.
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="relatorio_he.csv"'
+
+        registro_he = RegistroHoraExtra.objects.filter(utilizada=False)
+
+        writer = csv.writer(response)
+        writer.writerow(['Funcionário', 'Motivo', 'Horas Extra'])
+
+        for registro in registro_he:
+            writer.writerow([registro.funcionario, registro.motivo, registro.horaextra])
+
+        return response
+
+
+class ExportarExcelView(View):
+    def get(self, request):
+        response = HttpResponse(content_type='text/xlsx')
+        response['Content-Disposition'] = 'attachment; filename="relatorio_he.xlsx"'
+
+        registro_he = RegistroHoraExtra.objects.filter(utilizada=False)
+        lista = [[registro.funcionario, registro.motivo, registro.horaextra] for registro in registro_he]
+        df = pd.DataFrame(lista, columns=['Funcionário', 'Motivo', 'Horas Extra'])
+        df.to_excel(response, sheet_name="sheet_1")
+
+        return response

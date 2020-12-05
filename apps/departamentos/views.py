@@ -14,6 +14,7 @@ class DepartamentoListView(ListView):
         empresa_logada = self.request.user.funcionario.empresa
         return Departamento.objects.filter(empresa=empresa_logada)
 
+
 class DepartamentoCreateView(CreateView):
     model = Departamento
     fields = ['nome']
@@ -23,9 +24,11 @@ class DepartamentoCreateView(CreateView):
         departamento.empresa = self.request.user.funcionario.empresa
         return super(DepartamentoCreateView, self).form_valid(form)
 
+
 class DepartamentoUpdateView(UpdateView):
     model = Departamento
     fields = ['nome']
+
 
 class DepartamentoDeleteView(DeleteView):
     model = Departamento

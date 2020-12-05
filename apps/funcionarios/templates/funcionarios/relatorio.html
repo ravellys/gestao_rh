@@ -1,0 +1,30 @@
+{% extends 'base/base.html' %}
+
+{% load bootstrap %}
+{% load static %}
+
+{% block css %}
+    <style>
+        .teste { color: red; }
+    </style>
+{% endblock %}
+
+{% block title %}
+    Relatório xtml2pdf
+{% endblock %}
+
+{% block main %}
+    <h1 class="teste"> Meu Relatório </h1>
+    <p class="btn btn-secondary"> {{ vendas }}</p>
+
+{% load plotly_dash %}
+
+<br>
+<h1> Plotagem </h1>
+
+<div class="{% plotly_class name='SimpleExample' %} card" style="height: 50%; width: 50%">
+    {% plotly_app name='SimpleExample' ratio=1 %}
+</div>
+<br>
+
+{% endblock %}

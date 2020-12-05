@@ -28,4 +28,5 @@ urlpatterns = [
     path('empresas/', include('apps.empresas.urls')),
     path('', include('apps.core.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('django_plotly_dash/', include('django_plotly_dash.urls')),
+    ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

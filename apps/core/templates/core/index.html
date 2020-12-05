@@ -4,6 +4,7 @@
     Página Core
 {% endblock %}
 
+
 {% block main %}
     <div class="col-lg">
         <h1> Bem vindo </h1>
@@ -27,8 +28,11 @@
 
         {% endif %}
     </div>
+
     <div class="col-sm">
         <a href="{% url 'logout' %}">Logout</a>
     </div>
+
+    {% include 'core/dash_plotly.html' %}
 
 {% endblock %}

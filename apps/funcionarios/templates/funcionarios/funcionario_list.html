@@ -18,5 +18,13 @@
 
     {% endfor %}
 
-    <a href="{% url 'create_funcionarios' %}" class="btn btn-info"> Novo</a>
+    <div class="col-sm">
+        <a href="{% url 'create_funcionarios' %}" class="btn btn-info"> Novo </a>
+        <a class="btn btn-secondary" href="{% url 'pdf-reportlab' %}"> Relatório de funcionários (report-lab) </a>
+        <a class="btn btn-outline-dark" href="{% url 'pdf-xtml2pdf' %}"> Relatório de funcionários (xhtml2pdf) </a>
+        <a class="btn btn-danger" href="{% url 'pdf-xtml2pdf-debug' %}"> Relatório de funcionários (xhtml2pdf template) </a>
+    </div>
+
+
+
 {% endblock %}

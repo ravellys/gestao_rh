@@ -5,11 +5,14 @@
 {% endblock %}
 
 {% block main %}
+
+
     <form method="post">
         {% csrf_token %}
         <p> Você está certo de que quer deletar o funcionario {{ object }}</p>
         {{ form.as_p }}
         <button type="submit" class="btn btn-danger"> Deletar </button>
     </form>
+
 
 {% endblock %}
