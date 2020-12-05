@@ -16,8 +16,19 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path, include
+from apps.core.views import home, GroupViewSet, UserViewSet
 
+
+from django.urls import include, path
+from rest_framework import routers
+
+from apps.funcionarios.api.viewsets import FuncionarioViewSet
+
+router = routers.DefaultRouter()
+router.register(r'users', UserViewSet)
+router.register(r'groups', GroupViewSet)
+router.register(r'api/funcionario', FuncionarioViewSet)
+router.register(r'api/hora-extra', FuncionarioViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,4 +40,7 @@ urlpatterns = [
     path('', include('apps.core.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('django_plotly_dash/', include('django_plotly_dash.urls')),
+
+    path('', include(router.urls)),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
