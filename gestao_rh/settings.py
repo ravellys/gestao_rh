@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     'bootstrapform',
     'django_plotly_dash.apps.DjangoPlotlyDashConfig',
     'rest_framework',
-    'rest_framework.authtoken'
+    'rest_framework.authtoken',
+    'django_celery_results',
 ]
 
 MIDDLEWARE = [
@@ -151,3 +152,10 @@ REST_FRAMEWORK = {
     #     'rest_framework.permissions.IsAdminUser'
     # ),
 }
+
+# Celery configurations
+CELERY_RESULT_BACKEND = 'django-db'
+CELERY_BROKER_URL = 'redis://localhost:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
