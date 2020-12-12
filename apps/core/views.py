@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
 from django.shortcuts import render
 
 # API imports
@@ -6,11 +7,17 @@ from apps.core.api.serializers import UserSerializer, GroupSerializer
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from rest_framework import permissions
+from .tasks import send_relatorio
 
 @login_required()
 def home(requests):
     data = {'usuario': requests.user}
     return render(requests, 'core/index.html', context=data)
+
+
+def celery(requests):
+    send_relatorio.delay()
+    return HttpResponse('email enviado')
 
 
 class UserViewSet(viewsets.ModelViewSet):
