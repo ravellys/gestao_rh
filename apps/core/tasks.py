@@ -26,7 +26,7 @@ def send_relatorio():
         subject='Subject here',
         message='Here is the mensage',
         from_email=settings.EMAIL_HOST_USER,
-        recipient_list=['lucas.ravellys@ufpe.br'],
+        recipient_list=['lucas.ravellys@ufpe.br', 'abraao.vilanova@ufpe.br'],
         fail_silently=False,
     )
     return True
