@@ -14,6 +14,7 @@ from apps.registro_hora_extra.models import RegistroHoraExtra
 
 import pandas as pd
 
+
 class RegistroHoraExtraListView(ListView):
     model = RegistroHoraExtra
 
